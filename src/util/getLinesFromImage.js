@@ -46,22 +46,22 @@ module.exports = function getLinesFromImage(image, roiOptions = {}) {
 
   var painted = manager.paint(roiOptions);
 
-  rois.forEach(function (roi) {
-    // draw bounding boxes
-    var mask = roi.getMask();
-    var mbr = mask.minimalBoundingRectangle();
-    roi.mbr = mbr;
-    roi.mbrWidth = getDistance(mbr[0], mbr[1]);
-    roi.mbrHeight = getDistance(mbr[1], mbr[2]);
-    roi.mbrSurface = roi.mbrWidth * roi.mbrHeight;
-    roi.fillingFactor = roi.surface / roi.mbrSurface;
+//   rois.forEach(function (roi) {
+//     // draw bounding boxes
+//     var mask = roi.getMask();
+//     var mbr = mask.minimalBoundingRectangle();
+//     roi.mbr = mbr;
+//     roi.mbrWidth = getDistance(mbr[0], mbr[1]);
+//     roi.mbrHeight = getDistance(mbr[1], mbr[2]);
+//     roi.mbrSurface = roi.mbrWidth * roi.mbrHeight;
+//     roi.fillingFactor = roi.surface / roi.mbrSurface;
 
-    mbr = mbr.map((point) => [
-      point[0] + mask.position[0],
-      point[1] + mask.position[1]
-    ]);
-    painted.paintPolyline(mbr, { color: [255, 0, 0] });
-  });
+//     mbr = mbr.map((point) => [
+//       point[0] + mask.position[0],
+//       point[1] + mask.position[1]
+//     ]);
+//     painted.paintPolyline(mbr, { color: [255, 0, 0] });
+//   });
 
   return {
     lines: groupRoisPerLine(rois, roiOptions),
